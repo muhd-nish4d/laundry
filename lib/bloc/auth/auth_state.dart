@@ -18,7 +18,7 @@ class AuthLoggedinState extends AuthState {}
 class AuthLoggedOutState extends AuthState {}
 
 class AuthErrorState extends AuthState {
-  final String error;
+  final String? error;
 
   const AuthErrorState(this.error);
 }

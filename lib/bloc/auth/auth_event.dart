@@ -20,3 +20,5 @@ class OTPVerificationEvent extends AuthEvent {
 
   const OTPVerificationEvent(this.otp);
 }
+
+class LogOutEvent extends AuthEvent {}

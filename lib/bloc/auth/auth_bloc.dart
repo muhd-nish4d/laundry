@@ -38,9 +38,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthErrorState(e.toString()));
       }
     });
+
+    on<LogOutEvent>((event, emit) async {
+      try {
+        await firebaseAuth.signOut();
+        emit(AuthLoggedOutState());
+      } catch (e) {
+        emit(AuthLoggedOutState());
+      }
+    });
   }
 
-  
   void sentOtp(String phoneNumber) async {
     await firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,

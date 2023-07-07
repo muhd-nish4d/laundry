@@ -85,7 +85,7 @@ class ScreenOTPEnter extends StatelessWidget {
                 builder: (context, value, child) {
                   return BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
-                      if (state is AuthLoadingstate) {
+                      if (state is AuthLoggedinState) {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -98,13 +98,7 @@ class ScreenOTPEnter extends StatelessWidget {
                       if (state is AuthLoadingstate) {
                         return const CircularProgressIndicator();
                       } else if (state is AuthErrorState) {
-                        return SnackBar(
-                          content: Text(state.error),
-                          backgroundColor: Colors.green,
-                          elevation: 10,
-                          behavior: SnackBarBehavior.floating,
-                          margin: const EdgeInsets.all(5),
-                        );
+                        return Text('Error');
                         // return ScaffoldMessenger.of(context).showSnackBar(snackdemo);
                       } else {
                         return MoreWidthButton(

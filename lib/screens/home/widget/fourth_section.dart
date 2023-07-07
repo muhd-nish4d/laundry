@@ -1,6 +1,8 @@
+import 'package:authentication/bloc/auth/auth_bloc.dart';
 import 'package:authentication/constants/colors.dart';
 import 'package:authentication/constants/gaps.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FourthSection extends StatelessWidget {
   const FourthSection({
@@ -44,7 +46,9 @@ class FourthSection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30)),
                       foregroundColor: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                    },
                     child: const Text('See All >'))
               ],
             ),

@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:authentication/bottum_nav/bottum_nav.dart';
 import 'package:authentication/screens/splash/widgets/center_circle.dart';
 import 'package:authentication/screens/splash/widgets/side_triangle.dart';
 import 'package:authentication/screens/starting/get_start.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../bloc/auth/auth_bloc.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -16,10 +20,21 @@ class ScreenSplash extends StatefulWidget {
 class _ScreenSplashState extends State<ScreenSplash> {
   @override
   void initState() {
+    BlocProvider.of<AuthBloc>(context).add(AuthInitialEvent());
     Timer(
         const Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const ScreenGetStarted())));
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        if (state is AuthLoggedinState) {
+                          return const ScreenMain();
+                        } else {
+                          return const ScreenGetStarted();
+                        }
+                      },
+                    ))));
     super.initState();
   }
 
